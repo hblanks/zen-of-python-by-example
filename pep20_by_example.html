@@ -1,0 +1,695 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">=====================================</span>
+<span class="sd">PEP 20 (The Zen of Python) by example</span>
+<span class="sd">=====================================</span>
+
+<span class="sd">Usage: %prog</span>
+
+<span class="sd">:Author: Hunter Blanks, hblanks@artifex.org / hblanks@monetate.com</span>
+<span class="sd">:Date: 2011-02-08 for PhillyPUG/philly.rb, revised 2011-02-10</span>
+
+<span class="sd">Sources:</span>
+
+<span class="sd">    - http://artifex.org/~hblanks/talks/2011/pep20_by_example.pdf</span>
+<span class="sd">    - http://artifex.org/~hblanks/talks/2011/pep20_by_example.html</span>
+<span class="sd">    - http://artifex.org/~hblanks/talks/2011/pep20_by_example.py.txt</span>
+
+<span class="sd">Dependencies for PDF output:</span>
+
+<span class="sd">    - Pygments 1.4</span>
+<span class="sd">    - pdflatex &amp; the usual mess of latex packages</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">with_statement</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c">################################ preface ###############################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   &quot;In his wisdom and in his Molisan poverty, Officer Ingravallo,</span>
+<span class="sd">    who seemed to live on silence... , in his wisdom, he sometimes</span>
+<span class="sd">    interrupted this silence and this sleep to enunciate some</span>
+<span class="sd">    theoretical idea (a general idea, that is) on the affairs of men,</span>
+<span class="sd">    and of women. At first sight, or rather, on first hearing, these</span>
+<span class="sd">    seemed banalities. They weren&#39;t banalities. And so, those rapid</span>
+<span class="sd">    declarations, which crackled on his lips like the sudden</span>
+<span class="sd">    illumination of a sulphur match, were revived in the ears of people</span>
+<span class="sd">    at a distance of hours, or of months, from their enunciation: as if</span>
+<span class="sd">    after a mysterious period of incubation. &#39;That&#39;s right!&#39; the person</span>
+<span class="sd">    in question admitted, &#39;That&#39;s exactly what Ingravallo said to me.&#39;&quot;</span>
+
+<span class="sd">        - Carlo Emilio Gadda, *That Awful Mess on the Via Merulana*</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">################################# text #################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Zen of Python, by Tim Peters</span>
+
+<span class="sd">Beautiful is better than ugly.</span>
+<span class="sd">Explicit is better than implicit.</span>
+<span class="sd">Simple is better than complex.</span>
+<span class="sd">Complex is better than complicated.</span>
+<span class="sd">Flat is better than nested.</span>
+<span class="sd">Sparse is better than dense.</span>
+<span class="sd">Readability counts.</span>
+<span class="sd">Special cases aren&#39;t special enough to break the rules.</span>
+<span class="sd">Although practicality beats purity.</span>
+<span class="sd">Errors should never pass silently.</span>
+<span class="sd">Unless explicitly silenced.</span>
+<span class="sd">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="sd">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="sd">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
+<span class="sd">Now is better than never.</span>
+<span class="sd">Although never is often better than *right* now.</span>
+<span class="sd">If the implementation is hard to explain, it&#39;s a bad idea.</span>
+<span class="sd">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="sd">Namespaces are one honking great idea -- let&#39;s do more of those!</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">################################### 1 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Give me a function that takes a list of numbers and returns only the</span>
+<span class="sd">even ones, divided by two.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="n">halve_evens_only</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">nums</span><span class="p">:</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="ow">not</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">halve_evens_only</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Beautiful is better than ugly.&#39;</span>
+
+<span class="c">################################## 2 ###################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Load the cat, dog, and mouse models so we can edit instances of them.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">load</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">menagerie.cat.models</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">menagerie.dog.models</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">menagerie.mouse.models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">load</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">menagerie.models</span> <span class="kn">import</span> <span class="n">cat</span> <span class="k">as</span> <span class="n">cat_models</span>
+    <span class="kn">from</span> <span class="nn">menagerie.models</span> <span class="kn">import</span> <span class="n">dog</span> <span class="k">as</span> <span class="n">dog_models</span>
+    <span class="kn">from</span> <span class="nn">menagerie.models</span> <span class="kn">import</span> <span class="n">mouse</span> <span class="k">as</span> <span class="n">mouse_models</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Explicit is better than implicit.&#39;</span>
+
+<span class="c">################################### 3 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Can you write out these measurements to disk?</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">&#39;weight&#39;</span><span class="p">:</span> <span class="mf">392.3</span><span class="p">,</span> <span class="s">&#39;color&#39;</span><span class="p">:</span> <span class="s">&#39;purple&#39;</span><span class="p">,</span> <span class="s">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">33.4</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;weight&#39;</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span> <span class="s">&#39;color&#39;</span><span class="p">:</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;temperature&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.1</span><span class="p">},</span>
+    <span class="p">]</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">sqlalchemy</span>
+    <span class="kn">import</span> <span class="nn">sqlalchemy.types</span> <span class="kn">as</span> <span class="nn">sqltypes</span>
+    
+    <span class="n">db</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;sqlite:///measurements.db&#39;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">echo</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">MetaData</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&#39;measurements&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;weight&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;temperature&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;color&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">checkfirst</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">**</span><span class="n">measurement</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;measurements.json&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Simple is better than complex.&#39;</span>
+
+<span class="c">################################### 4 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Can you write out those same measurements to a MySQL DB? I think we&#39;re</span>
+<span class="sd">gonna have some measurements with multiple colors next week, by the way.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">sqlalchemy</span>
+    <span class="kn">import</span> <span class="nn">sqlalchemy.types</span> <span class="kn">as</span> <span class="nn">sqltypes</span>
+    
+    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span>
+        <span class="s">&#39;mysql://user:password@localhost/db?charset=utf8&amp;use_unicode=1&#39;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">echo</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">MetaData</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&#39;measurements&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;weight&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;temperature&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;color&#39;</span><span class="p">,</span> <span class="n">sqltypes</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">checkfirst</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">**</span><span class="n">measurement</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">MySQLdb</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="s">&quot;db&quot;</span><span class="p">)</span>
+    
+    <span class="n">c</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        CREATE TABLE IF NOT EXISTS measurements</span>
+<span class="s">          id int(11) NOT NULL auto_increment,</span>
+<span class="s">          weight float,</span>
+<span class="s">          temperature float,</span>
+<span class="s">          color varchar(32)</span>
+<span class="s">          PRIMARY KEY id</span>
+<span class="s">          ENGINE=InnoDB CHARSET=utf8</span>
+<span class="s">          &quot;&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="n">insert_sql</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s">&quot;INSERT INTO measurements (weight, temperature, color) &quot;</span>
+        <span class="s">&quot;VALUES (</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_sql</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">measurement</span><span class="p">[</span><span class="s">&#39;weight&#39;</span><span class="p">],</span> <span class="n">measurement</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">],</span> <span class="n">measurement</span><span class="p">[</span><span class="s">&#39;color&#39;</span><span class="p">])</span>
+            <span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Complex is better than complicated.&#39;</span>
+
+<span class="c">################################### 5 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot;Identify this animal. &quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">identify</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_vertebrate</span><span class="p">():</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">poke</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">noise</span> <span class="o">==</span> <span class="s">&#39;moo&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;cow&#39;</span>
+        <span class="k">elif</span> <span class="n">noise</span> <span class="o">==</span> <span class="s">&#39;woof&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;dog&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_multicellular</span><span class="p">():</span>
+            <span class="k">return</span> <span class="s">&#39;Bug!&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_fungus</span><span class="p">():</span>
+                <span class="k">return</span> <span class="s">&#39;Yeast&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s">&#39;Amoeba&#39;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">identify</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_vertebrate</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">identify_vertebrate</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">identify_invertebrate</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">identify_vertebrate</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">poke</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">noise</span> <span class="o">==</span> <span class="s">&#39;moo&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;cow&#39;</span>
+    <span class="k">elif</span> <span class="n">noise</span> <span class="o">==</span> <span class="s">&#39;woof&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;dog&#39;</span>
+
+<span class="k">def</span> <span class="nf">identify_invertebrate</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_multicellular</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s">&#39;Bug!&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_fungus</span><span class="p">():</span>
+            <span class="k">return</span> <span class="s">&#39;Yeast&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;Amoeba&#39;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Flat is better than nested.&#39;</span>
+
+<span class="c">################################### 6 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot; Parse an HTTP response object, yielding back new requests or data. &quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">cssselect</span><span class="o">.</span><span class="n">CSSSelector</span><span class="p">(</span><span class="s">&#39;#main &gt; div.text&#39;</span><span class="p">)</span>
+    <span class="n">lx</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">lx</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;./head/title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s">&#39;href&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">lx</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;./a&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="s">&#39;href&#39;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">attrib</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">link</span><span class="p">)</span>
+    <span class="n">divs</span> <span class="o">=</span> <span class="n">selector</span><span class="p">(</span><span class="n">lx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">divs</span><span class="p">:</span> <span class="k">yield</span> <span class="n">Item</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">lx_to_text</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">lx</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="n">lx</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;./head/title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s">&#39;href&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">lx</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;./a&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="s">&#39;href&#39;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">attrib</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">link</span><span class="p">)</span>
+
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">cssselect</span><span class="o">.</span><span class="n">CSSSelector</span><span class="p">(</span><span class="s">&#39;#main &gt; div.text&#39;</span><span class="p">)</span>
+    <span class="n">divs</span> <span class="o">=</span> <span class="n">selector</span><span class="p">(</span><span class="n">lx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">divs</span><span class="p">:</span>
+        <span class="n">bodytext</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">lx_to_text</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">yield</span> <span class="n">Item</span><span class="p">(</span><span class="n">bodytext</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Sparse is better than dense.&#39;</span>
+
+<span class="c">################################### 7 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot; Write out the tests for a factorial function. &quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the factorial of n, an exact integer &gt;= 0.</span>
+
+<span class="sd">    &gt;&gt;&gt; [factorial(n) for n in range(6)]</span>
+<span class="sd">    [1, 1, 2, 6, 24, 120]</span>
+
+<span class="sd">    &gt;&gt;&gt; factorial(30)</span>
+<span class="sd">    265252859812191058636308480000000L</span>
+
+<span class="sd">    &gt;&gt;&gt; factorial(-1)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    ValueError: n must be &gt;= 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span> <span class="ow">and</span> <span class="s">&#39;--test&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">FactorialTests</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_ints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">test_long</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">factorial</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="il">265252859812191058636308480000000L</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_negative_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">factorial</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span> <span class="ow">and</span> <span class="s">&#39;--test&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Readability counts.&#39;</span>
+
+<span class="c">################################# 8 &amp; 9 ################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Write a function that returns another functions. Also, test floating point.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">make_counter</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">count</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot; Increments a count and returns it. &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="n">make_counter</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="s">&#39;__name__&#39;</span><span class="p">)</span> <span class="c"># No anonymous functions!</span>
+<span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="s">&#39;__doc__&#39;</span><span class="p">)</span>
+
+
+<span class="k">assert</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;0.20000000000000007&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span> <span class="c"># (this is platform dependent)</span>
+<span class="k">assert</span> <span class="mf">0.2</span> <span class="o">!=</span> <span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span> <span class="c"># Not special enough to break the rules of floating pt.</span>
+<span class="k">assert</span> <span class="nb">float</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span><span class="p">))</span> <span class="o">==</span> <span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">make_adder</span><span class="p">(</span><span class="n">addend</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">addend</span> <span class="c"># But lambdas, once in a while, are practical.</span>
+
+<span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;0.2&#39;</span> <span class="c"># as may be rounding off floating point errors</span>
+<span class="k">assert</span> <span class="nb">round</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">-</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&quot;Special cases aren&#39;t special enough to break the rules.&quot;</span>
+<span class="k">print</span> <span class="s">&#39;Although practicality beats purity.&#39;</span>
+
+<span class="c">################################ 10 &amp; 11 ###############################</span>
+
+<span class="sd">&quot;&quot;&quot; Import whatever json library is available. &quot;&quot;&quot;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">simplejson</span> <span class="kn">as</span> <span class="nn">json</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;Unable to find json module!&#39;</span>
+        <span class="k">raise</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;Errors should never pass silently&#39;</span>
+<span class="k">print</span> <span class="s">&#39;Unless explicitly silenced.&#39;</span>
+
+<span class="c">################################## 12 ##################################</span>
+
+<span class="sd">&quot;&quot;&quot; Store an HTTP request in the database. &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">charset</span> <span class="o">=</span> <span class="n">detect_charset</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="s">&#39;In the face of ambiguity, refuse the temptation to guess.&#39;</span>
+
+<span class="c">################################## 13 ##################################</span>
+
+<span class="c"># Example 1</span>
+<span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">__builtins__</span><span class="p">,</span> <span class="s">&#39;map&#39;</span><span class="p">)</span> <span class="c"># (&#39;map&#39; in __builtins__) raises TypeError</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">__builtins__</span><span class="p">,</span> <span class="s">&#39;collect&#39;</span><span class="p">)</span>
+
+<span class="c"># Example 2</span>
+<span class="k">def</span> <span class="nf">fibonacci_generator</span><span class="p">():</span>
+    <span class="n">prior</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">prior</span> <span class="o">+</span> <span class="n">current</span>
+        <span class="n">prior</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="p">,</span> <span class="n">current</span> <span class="o">+</span> <span class="n">prior</span>
+
+<span class="n">sequences</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;fie&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="n">fibonacci_generator</span><span class="p">(),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span> <span class="c"># all sequences iterate the same way</span>
+        <span class="k">pass</span>
+
+<span class="c">#-----------------------------------------------------------------------</span>
+
+<span class="k">print</span> <span class="s">&#39;There should be one, and preferably only one way to do it.&#39;</span>
+<span class="k">print</span> <span class="s">&quot;Although that way may not be obvious at first unless you&#39;re Dutch.&quot;</span>
+
+<span class="c">################################## 14 ##################################</span>
+
+<span class="k">def</span> <span class="nf">obsolete_func</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">PendingDeprecationWarning</span>
+
+<span class="k">def</span> <span class="nf">deprecated_func</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">DeprecationWarning</span>
+
+<span class="k">print</span> <span class="s">&#39;Now is better than never&#39;</span>
+<span class="k">print</span> <span class="s">&#39;Although never is often better than *right* now.&#39;</span>
+
+<span class="c">################################## 15 ##################################</span>
+
+<span class="k">def</span> <span class="nf">hard</span><span class="p">():</span>
+
+    <span class="c"># Example 1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">twisted</span>
+        <span class="n">help</span><span class="p">(</span><span class="n">twisted</span><span class="p">)</span> <span class="c"># (this may not be as hard as I think, though)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c"># Example 2</span>
+    <span class="kn">import</span> <span class="nn">xml.dom.minidom</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">dom</span><span class="o">.</span><span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span>
+        <span class="sd">&#39;&#39;&#39;&lt;menagerie&gt;&lt;cat&gt;Fluffers&lt;/cat&gt;&lt;cat&gt;Cisco&lt;/cat&gt;&lt;/menagerie&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="n">menagerie</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">menagerie</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nodeValue</span><span class="o">==</span> <span class="s">&#39;Cisco&#39;</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s">&#39;cat&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">node</span>
+
+
+<span class="k">def</span> <span class="nf">easy</span><span class="p">(</span><span class="n">maybe</span><span class="p">):</span>
+
+    <span class="c"># Example 1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">gevent</span>
+        <span class="n">help</span><span class="p">(</span><span class="n">gevent</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c"># Example 2</span>
+    <span class="kn">import</span> <span class="nn">lxml</span>
+    <span class="n">menagerie</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+        <span class="sd">&#39;&#39;&#39;&lt;menagerie&gt;&lt;cat&gt;Fluffers&lt;/cat&gt;&lt;cat&gt;Cisco&lt;/cat&gt;&lt;/menagerie&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pet</span> <span class="ow">in</span> <span class="n">menagerie</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;./cat&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pet</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s">&#39;Cisco&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pet</span>
+
+<span class="k">print</span> <span class="s">&quot;If the implementation is hard to explain, it&#39;s a bad idea.&quot;</span>
+<span class="k">print</span> <span class="s">&#39;If the implementation is easy to explain, it may be a good idea.&#39;</span>
+
+<span class="c">################################## 16 ##################################</span>
+
+<span class="k">def</span> <span class="nf">chase</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">menagerie.models.cat</span> <span class="kn">as</span> <span class="nn">cat</span>
+    <span class="kn">import</span> <span class="nn">menagerie.models.dog</span> <span class="kn">as</span> <span class="nn">dog</span>
+    
+    <span class="n">dog</span><span class="o">.</span><span class="n">chase</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+    <span class="n">cat</span><span class="o">.</span><span class="n">chase</span><span class="p">(</span><span class="n">mouse</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;Namespaces are one honking great idea -- let&#39;s do more of those!&quot;</span>
+
+<span class="c">############################### Readings ###############################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    - Peters, Tim. PEP 20, &quot;The Zen of Python&quot;.</span>
+
+<span class="sd">    - Raymond, Eric. *The Art of Unix Programming*.</span>
+<span class="sd">      (http://www.catb.org/~esr/writings/taoup/)</span>
+
+<span class="sd">    - Alchin, Marty. *Pro Python*.</span>
+
+<span class="sd">    - Ramblings on </span>
+<span class="sd">      http://stackoverflow.com/questions/228181/the-zen-of-python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">############################## main block ##############################</span>
+
+<span class="kn">from</span> <span class="nn">optparse</span> <span class="kn">import</span> <span class="n">OptionParser</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">(</span><span class="n">usage</span><span class="o">=</span><span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-v&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s">&#39;Verbose output&#39;</span><span class="p">)</span>
+
+<span class="n">header_pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;^</span><span class="se">\\</span><span class="s">PY\{c\}\{&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">PYZsh\{\}&#39;</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">yield_altered_lines</span><span class="p">(</span><span class="n">latex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds page breaks and page layout to our pygments file. Blah.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">latex</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s">r&#39;\documentclass{article}&#39;</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">line</span>
+            <span class="k">yield</span> <span class="s">r&#39;\usepackage{geometry}&#39;</span>
+            <span class="k">yield</span> <span class="s">r&#39;\geometry{letterpaper,landscape,margin=0.25in}&#39;</span>
+        <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s">r&#39;\begin{document}&#39;</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">line</span>
+            <span class="k">yield</span> <span class="s">r&#39;\large&#39;</span>
+        <span class="k">elif</span> <span class="n">header_pat</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="s">r&#39;\end{Verbatim}&#39;</span>
+            <span class="k">yield</span> <span class="s">r&#39;\pagebreak&#39;</span>
+            <span class="k">yield</span> <span class="s">r&#39;\begin{Verbatim}[commandchars=</span><span class="se">\\</span><span class="s">\{\}]&#39;</span>
+            <span class="k">yield</span> <span class="n">line</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">line</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span>
+    <span class="n">options</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+        <span class="n">errout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">errout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/pep20.log&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># TODO: pygmentize in Python instead of farming it out</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+            <span class="p">(</span><span class="s">&#39;pygmentize&#39;</span><span class="p">,</span> <span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="s">&#39;latex&#39;</span><span class="p">,</span> <span class="s">&#39;-l&#39;</span><span class="p">,</span> <span class="s">&#39;python&#39;</span><span class="p">,</span>
+                <span class="s">&#39;-O&#39;</span><span class="p">,</span> <span class="s">&#39;full&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">errout</span><span class="p">)</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;pygmentize exited with </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span>
+
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+            <span class="p">(</span><span class="s">&#39;pygmentize&#39;</span><span class="p">,</span> <span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;-l&#39;</span><span class="p">,</span> <span class="s">&#39;python&#39;</span><span class="p">,</span>
+                <span class="s">&#39;-O&#39;</span><span class="p">,</span> <span class="s">&#39;full&#39;</span><span class="p">,</span> <span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="s">&#39;pep20_by_example.html&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">stdout</span><span class="o">=</span><span class="n">errout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">errout</span><span class="p">)</span>
+        <span class="n">p2</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">p2</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;pygmentize exited with </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">p2</span><span class="o">.</span><span class="n">returncode</span>
+
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#39;Failed to run pygmentize: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">e</span>
+
+    <span class="n">altered_output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">yield_altered_lines</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">((</span><span class="s">&#39;pdflatex&#39;</span><span class="p">,),</span>
+            <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">errout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">errout</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">altered_output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;pdflatex exited with </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span>
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#39;Failed to run pygmentize: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">e</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s">&#39;texput.pdf&#39;</span><span class="p">,</span> <span class="s">&#39;pep20_by_example.pdf&#39;</span><span class="p">)</span>
+
+    <span class="n">errout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</body>
+</html>
