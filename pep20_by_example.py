@@ -239,9 +239,9 @@ def identify(animal):
 
 def identify(animal):
     if animal.is_vertebrate():
-        return identify_vertebrate()
+        return identify_vertebrate(animal)
     else:
-        return identify_invertebrate()
+        return identify_invertebrate(animal)
 
 def identify_vertebrate(animal):
     noise = animal.poke()
